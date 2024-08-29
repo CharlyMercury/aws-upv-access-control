@@ -1,0 +1,14 @@
+[Unit]
+Description=Sqs Queues Consumer
+After=network-online.target
+
+[Service]
+ExecStart=/home/edumediatics/aws-upv-access-control/venv/bin/python consumer.py
+WorkingDirectory=/home/edumediatics/aws-upv-access-control
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+User=edumediatics
+
+[Install]
+WantedBy=multi-user.target
