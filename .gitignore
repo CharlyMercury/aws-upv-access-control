@@ -1,0 +1,6 @@
+parameters_email.json
+parameters_sqs.json
+controlaccesoupv_accessKeys.csv
+/venv
+venv
+.idea
