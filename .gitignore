@@ -6,3 +6,6 @@ venv
 .idea
 src/__pycache__
 __pycache__
+src/html_body.html
+html_body.html
+consumer.log
