@@ -1,12 +1,7 @@
 import json
 import boto3
 from src.send_email import SendEmail
-
-
 import logging
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.INFO)
-logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)-8s %(message)s', datefmt='%a, %d %b %Y %H:%M:%S', filename='/home/edumediatics/aws-upv-access-control/consumer.log', filemode='w')   
 
 
 def consumer_sqs(parameters):
@@ -29,11 +24,15 @@ def consumer_sqs(parameters):
         )
 
         if "Messages" not in response:
-            print("La cola ESTÁ vacía")
+            logger.info('------------------------')
+            logger.info("La cola ESTÁ vacía")
+            logger.info('------------------------')
         else:
             for message in response["Messages"]:
                 message_body = json.loads(message['Body'])
-                # print(message_body)
+                logger.info('------------------------')
+                logger.info(message_body)
+                logger.info('------------------------')
                 send_email_instance.create_email(message_body)
 
                 response_delete = client.delete_message(
