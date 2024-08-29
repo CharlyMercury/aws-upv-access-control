@@ -1,7 +1,7 @@
 # Crear contraseñas de aplicación https://support.google.com/mail/answer/185833?hl=es-419
 import json
 import smtplib
-from html_file import crear_html
+from src.html_file import crear_html
 from email.message import EmailMessage
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
