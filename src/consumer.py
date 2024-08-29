@@ -3,6 +3,9 @@ import boto3
 from src.send_email import SendEmail
 import logging
 
+logger = logging.getLogger("main_consumer")
+logger.setLevel(logging.INFO)
+
 
 def consumer_sqs(parameters):
 
