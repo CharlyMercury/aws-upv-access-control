@@ -6,7 +6,7 @@ with open(file=r"parameters_sqs.json", mode="r", encoding="utf-8") as file:
 
 
 def run():
-    print("Running")
+    print("\t\t---Control de Acceso---\n\t---Metodología de la programación---\n")
     producer_sqs(parameters)
 
 

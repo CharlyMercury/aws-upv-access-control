@@ -38,21 +38,20 @@ def crear_html(matricula, timestamp, subject, receiver, content):
             <td
               style="
                 padding: 20px;
-                font-size: 16px;
                 line-height: 1.5;
                 color: #333333;
               "
             >
               <h3> Estimado/a: {matricula}, </h3>
               <h4> Gracias por asistir a tu clase del día de hoy: {today_day} </h4>
-              <h4> {content} </h4>
+              {content}
 
-              <h4 style="margin: 0px; padding: 0px; color: #333333;"> Saludos cordiales. </h4>
-              <h4 style="margin: 0px; padding: 0px; color: #333333;"><strong> MC. Carlos Antonio Tovar García </strong></h4>
-              <h4 style="margin: 0px; padding: 0px; color: #333333;">Profesor de Metodología de la Programación</h4>
-              <h4 style="margin: 0px; padding: 0px; color: #333333;">Ingeniería Mecatrónica</h4>
-              <h4 style="margin: 0px; padding: 0px; color: #333333;">Universidad Politécnica de Victoria</h4>
-              <h4 style="margin: 0px; padding: 0px; color: #333333;">Email: <a href="mailto:ctovarg@upv.edu.mx">ctovarg@upv.edu.mx</a></h4>
+              <h5 style="margin: 0px; padding: 0px; color: #333333;"> Saludos cordiales. </h5>
+              <h5 style="margin: 0px; padding: 0px; color: #333333;"><strong> MC. Carlos Antonio Tovar García </strong></h5>
+              <h5 style="margin: 0px; padding: 0px; color: #333333;">Profesor de Metodología de la Programación</h5>
+              <h5 style="margin: 0px; padding: 0px; color: #333333;">Ingeniería Mecatrónica</h5>
+              <h5 style="margin: 0px; padding: 0px; color: #333333;">Universidad Politécnica de Victoria</h5>
+              <h5 style="margin: 0px; padding: 0px; color: #333333;">Email: <a href="mailto:ctovarg@upv.edu.mx">ctovarg@upv.edu.mx</a></h4>
 
               <h6>
                 Si no perteneces a la clase: Metodología de la Programación 
