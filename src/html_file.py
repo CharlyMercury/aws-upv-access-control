@@ -11,7 +11,7 @@ def crear_html(matricula, timestamp, subject, receiver, content):
         body_title = " Bienvenido a la clase: Metodología de la programación. "
         first_greeting = f" Gracias por asistir a tu clase del día de hoy: {today_day} "
         background_color_title = "#138808"
-        background_letters_color_title = "#000000"
+        background_letters_color_title = "#ffffff"
     elif "tarea" in trigger_basein_subject:
         body_title = " Tarea Semanal: Metodología de la programación. "
         first_greeting = f" Me da gusto saludarte el día de hoy: {today_day}. A continuación te muestro las especificaciones para las tareas de la semana. "
@@ -21,7 +21,7 @@ def crear_html(matricula, timestamp, subject, receiver, content):
         body_title = " Aviso importante: Metodología de la programación. "
         first_greeting = f" Me da gusto saludarte el día de hoy: {today_day}."
         background_color_title = "#E4D00A"
-        background_letters_color_title = "#ffffff"
+        background_letters_color_title = "#000000"
 
     html_content = f"""<!DOCTYPE html>
     <html lang="es">
