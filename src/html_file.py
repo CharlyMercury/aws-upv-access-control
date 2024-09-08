@@ -5,6 +5,21 @@ def crear_html(matricula, timestamp, subject, receiver, content):
 
     today_day = datetime.datetime.fromtimestamp(float(timestamp)).strftime('%Y-%m-%d %H:%M:%S')
 
+    trigger_basein_subject = subject.lower()
+    
+    if "asistencia" in trigger_basein_subject:
+        body_title = " Bienvenido a la clase: Metodología de la programación. "
+        first_greeting = " Gracias por asistir a tu clase del día de hoy: {today_day} "
+        background_color_title = "#138808"
+    elif "tarea" in trigger_basein_subject:
+        body_title = " Tarea Semanal: Metodología de la programación. "
+        first_greeting = " Me da gusto saludarte el día de hoy: {today_day}. A continuación te muestro las especificaciones para las tareas de la semana. "
+        background_color_title = "#0073e6"
+    elif "aviso" in trigger_basein_subject:
+        body_title = " Aviso importante: Metodología de la programación. "
+        first_greeting = " Me da gusto saludarte el día de hoy: {today_day}."
+        background_color_title = "#E4D00A"
+
     html_content = f"""<!DOCTYPE html>
     <html lang="es">
     <head>
@@ -30,8 +45,8 @@ def crear_html(matricula, timestamp, subject, receiver, content):
           style="max-width: 600px; margin: 0 auto; background-color: #ffffff"
         >
           <tr>
-            <td align="center" bgcolor="#0073e6" style="padding: 20px; color: #ffffff; font-size: 24px" >
-             Bienvenido a la clase: Metodología de la programación.
+            <td align="center" bgcolor={background_color_title} style="padding: 20px; color: #ffffff; font-size: 24px" >
+             {body_title}
             </td>
           </tr>
           <tr>
@@ -43,7 +58,7 @@ def crear_html(matricula, timestamp, subject, receiver, content):
               "
             >
               <h3> Estimado/a: {matricula}, </h3>
-              <h4> Gracias por asistir a tu clase del día de hoy: {today_day} </h4>
+              <h4> {first_greeting} </h4>
               {content}
 
               <h5 style="margin: 0px; padding: 0px; color: #333333;"> Saludos cordiales. </h5>
