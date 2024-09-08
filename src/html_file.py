@@ -9,16 +9,19 @@ def crear_html(matricula, timestamp, subject, receiver, content):
     
     if "asistencia" in trigger_basein_subject:
         body_title = " Bienvenido a la clase: Metodología de la programación. "
-        first_greeting = " Gracias por asistir a tu clase del día de hoy: {today_day} "
+        first_greeting = f" Gracias por asistir a tu clase del día de hoy: {today_day} "
         background_color_title = "#138808"
+        background_letters_color_title = "#000000"
     elif "tarea" in trigger_basein_subject:
         body_title = " Tarea Semanal: Metodología de la programación. "
-        first_greeting = " Me da gusto saludarte el día de hoy: {today_day}. A continuación te muestro las especificaciones para las tareas de la semana. "
+        first_greeting = f" Me da gusto saludarte el día de hoy: {today_day}. A continuación te muestro las especificaciones para las tareas de la semana. "
         background_color_title = "#0073e6"
+        background_letters_color_title = "#ffffff"
     elif "aviso" in trigger_basein_subject:
         body_title = " Aviso importante: Metodología de la programación. "
-        first_greeting = " Me da gusto saludarte el día de hoy: {today_day}."
+        first_greeting = f" Me da gusto saludarte el día de hoy: {today_day}."
         background_color_title = "#E4D00A"
+        background_letters_color_title = "#ffffff"
 
     html_content = f"""<!DOCTYPE html>
     <html lang="es">
@@ -45,7 +48,7 @@ def crear_html(matricula, timestamp, subject, receiver, content):
           style="max-width: 600px; margin: 0 auto; background-color: #ffffff"
         >
           <tr>
-            <td align="center" bgcolor={background_color_title} style="padding: 20px; color: #ffffff; font-size: 24px" >
+            <td align="center" bgcolor={background_color_title} style="padding: 20px; color: {background_letters_color_title}; font-size: 24px" >
              {body_title}
             </td>
           </tr>
