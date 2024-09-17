@@ -5,13 +5,13 @@ from src.producer import producer_student_attendance, producer_student_homework,
 with open(file=r"parameters_sqs.json", mode="r", encoding="utf-8") as file:
     parameters = json.load(file)
 
-with open(file=r"classes/week_2/class_day_1.json", mode="r", encoding="utf-8") as file:
+with open(file=r"classes/week_3/class_day_1.json", mode="r", encoding="utf-8") as file:
     parameters_class = json.load(file)
 
-with open(file=r"homeworks/week_2/homework_1.json", mode="r", encoding="utf-8") as file:
+with open(file=r"homeworks/week_3/homework_1.json", mode="r", encoding="utf-8") as file:
     parameters_homework = json.load(file)
 
-with open(file=r"notifications/week_2/notification_1.json", mode="r", encoding="utf-8") as file:
+with open(file=r"notifications/week_3/notification_1.json", mode="r", encoding="utf-8") as file:
     parameters_notifications = json.load(file)
 
 def run(args):
