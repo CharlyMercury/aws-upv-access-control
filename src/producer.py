@@ -82,11 +82,11 @@ def set_attendance_in_excel(grupo_in, matricula):
 
 def producer_student_attendance(parameters, parameters_class):
 
-    """client = boto3.client("sqs",
+    client = boto3.client("sqs",
                         region_name=parameters["aws_region"],
                         aws_access_key_id=parameters["aws_key_id"],
                         aws_secret_access_key=parameters["aws_secret_key"])
-    queue_url = parameters["queue_url"]"""
+    queue_url = parameters["queue_url"]
 
     subject = f"{parameters_class["subject"]}: {course}. "
     day_objective = parameters_class["content"]
@@ -110,7 +110,7 @@ def producer_student_attendance(parameters, parameters_class):
 
         timestamp = time.time()
 
-        """response = client.send_message(
+        response = client.send_message(
             QueueUrl=queue_url,
             MessageBody=json.dumps({
                 "matricula": matricula,
@@ -122,7 +122,7 @@ def producer_student_attendance(parameters, parameters_class):
         )
 
         if response["ResponseMetadata"]["HTTPStatusCode"] == 200:
-            print(f"\tAlumno {matricula} capturado correctamente\t\n")"""
+            print(f"\tAlumno {matricula} capturado correctamente\t\n")
 
 
 def producer_student_homework(parameters, parameters_homework):

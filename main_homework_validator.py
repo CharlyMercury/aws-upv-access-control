@@ -2,7 +2,7 @@ import json
 from src.homework_validator import move_file_to, create_excel
 
 def run():
-    # move_file_to()
+    move_file_to()
     create_excel()
 
 

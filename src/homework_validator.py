@@ -2,6 +2,7 @@ import os
 import shutil
 import openpyxl
 import json
+from src.homework import Homework
 
 
 groups = ["75004", "75011", "75018"]
@@ -24,44 +25,14 @@ def move_file_to():
 
         if groups[2] in file_in_dir:
             shutil.move(downloads_path+"\\"+file_in_dir, path_to_move+f"\\Grupo-IM-20-{groups[2]}\\Tareas")
-
+        
 
 def create_excel():
 
     path_homeworks = "c:\\Users\\carlo\\OneDrive\\upv_clases\\Metodologia_de_la_programacion"
-
-    try: 
-        wb = openpyxl.Workbook()
-        wb.create_sheet('Tarea 1')
-        wb.create_sheet('Tarea 2')
-        
-        try:
-            Sheet1 = wb['Sheet']
-            wb.remove(Sheet1)
-        except Exception as err:
-            print('Not Sheet in document', err)
-
-        sheet_1 = wb['Tarea 1']             
-        sheet_2 = wb['Tarea 2']             
-
-        sheet_1.cell(row = 1, column = 1).value = 'Matricula'
-        sheet_1.cell(row = 1, column = 2).value = 'Nombre'
-        sheet_1.cell(row = 1, column = 3).value = 'Algoritmo Cotidiano'
-
-        sheet_2.cell(row = 1, column = 1).value = 'Matricula'
-        sheet_2.cell(row = 1, column = 2).value = 'Nombre'
-        sheet_2.cell(row = 1, column = 3).value = 'Algoritmo Industrial'
-
-    except Exception as err:
-        print(err)
-
+    tareas = {"Tarea1": 'Algoritmo Cotidiano', "Tarea2": 'Algoritmo Industrial', "Tarea3": 'Algoritmos de clase'}
 
     for group in groups:
-
-        files_in_dir = os.listdir(path_homeworks + f"\\Grupo-IM-20-{group}\\Tareas")
-        idex_hw1_ = 2
-        idex_hw2_ = 2
-        exit_flag = 0
 
         group_file = f"groups/IM_20-{group}.json"
         
@@ -69,44 +40,52 @@ def create_excel():
             parameters_group = json.load(file)
 
         students = parameters_group['students_id']
+        tareas_grupo = Homework(students, tareas)
+        files_in_dir = os.listdir(path_homeworks + f"\\Grupo-IM-20-{group}\\Tareas")
+
+        idex_hw1_ = 2
+        idex_hw2_ = 2
+        idex_hw3_ = 2
 
         for file in files_in_dir:
 
             params = file.strip().split('-')
-            # print(params[2], exit_flag)
+
+            if 'tarea' in params[0].lower():
+                continue
+
             current_student = params[2]
+            name = params[1]
 
             if ('algoritmo1' or 'cotidiano' or 'cotidian' or 'coti') in file.lower():
-                sheet_1.cell(row = idex_hw1_, column = 1).value = current_student
-                sheet_1.cell(row = idex_hw1_, column = 2).value = params[1]
-                sheet_1.cell(row = idex_hw1_, column = 3).value = 'Entregado'
+                tareas_grupo.set_value("Tarea1", idex_hw1_, current_student, name, 'Entregado')
+                tareas_grupo.set_student("Tarea1", current_student)
                 idex_hw1_+=1
-                exit_flag+=1
 
-                if int(current_student) not in students:        
-                    print(f"student {params[1]} - {current_student} not in {group}", exit_flag)
-
-            elif ('algoritmo2' or 'industrial' or 'indus' or 'industr') in file.lower():
-                sheet_2.cell(row = idex_hw2_, column = 1).value = current_student
-                sheet_2.cell(row = idex_hw2_, column = 2).value = params[1]
-                sheet_2.cell(row = idex_hw2_, column = 3).value = 'Entregado'
+            if ('algoritmo2' or 'industrial' or 'indus' or 'industr') in file.lower():
+                tareas_grupo.set_value('Tarea2', idex_hw2_, current_student, name, 'Entregado')
+                tareas_grupo.set_student('Tarea2', current_student)
                 idex_hw2_+=1                
-                exit_flag+=1
 
-                if int(current_student) not in students:        
-                    print(f"student {params[1]} - {current_student} not in {group}", exit_flag)
+            if 'algoritmos3' in file.lower():
+                tareas_grupo.set_value('Tarea3', idex_hw3_, current_student, name, 'Entregado')
+                tareas_grupo.set_student('Tarea3', current_student)
+                idex_hw3_+=1
 
-            if exit_flag == 2:
-                try:            
-                    students.remove(int(current_student))
-                    exit_flag = 0
-                except Exception as err:
-                    print("Error", err)
+        all_students = set({str(x) for x in students})
 
+        for key, _ in tareas_grupo.students_by_tarea.items():
+            students_homework = set(tareas_grupo.students_by_tarea[key])
+            students_with_no_homework = list(all_students.difference(students_homework))
+            tareas_grupo.students_by_tarea[key] = students_with_no_homework
+            print(f" Grupo: {group}, Tarea: {key},  Entregaron: {len(students_homework)}, No entregaron: {len(students_with_no_homework)}" )
+            # student_with_homework_sorted = [int(x) for x in list(students_homework)]
+            # print(sorted(student_with_homework_sorted), students_with_no_homework)
+            print(students_with_no_homework)
+        
+        # print(tareas_grupo.students_by_tarea)
 
-        print('No entregaron', students)
-
-        wb.save(path_homeworks + f"\\Grupo-IM-20-{group}\\Tareas\\Tarea.xlsx")
+        tareas_grupo.save_excel("c:\\Users\\carlo\\OneDrive\\upv_clases\\Metodologia_de_la_programacion"+f"\\Grupo-IM-20-{group}\\Tareas\\Tarea.xlsx")
 
 
 
